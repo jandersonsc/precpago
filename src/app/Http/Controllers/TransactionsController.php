@@ -25,7 +25,7 @@ class TransactionsController extends Controller {
 
             if ($timeDiff > 60) {
                 $httpStatus = 204;
-            } else if ($timeDiff <= 0) {
+            } else if ($timeDiff < 0) {
                 $httpStatus = 422;
             }
 
