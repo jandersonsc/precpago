@@ -10,13 +10,13 @@
 - Docker
 
 Execute no seu terminal:
-```
+```shell
 cd $CAMINHO_PROJETO/src
 docker-compose up -d
 ```
 
 #### Execução de testes
-```
+```shell
 docker exec precpag-api "./vendor/bin/phpunit"
 ```
 
@@ -26,13 +26,13 @@ docker exec precpag-api "./vendor/bin/phpunit"
 - Composer v2
 
 Execute no seu terminal:
-```
+```shell
 cd $CAMINHO_PROJETO/src
 composer install
 php artisan serve
 ```
 
 #### Execução de testes
-```
-./vendor/bin/phpunit
+```shell
+./src/vendor/bin/phpunit
 ```
