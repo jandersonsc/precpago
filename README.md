@@ -17,8 +17,8 @@ Em caso de não possuir Docker:
 ``docker-compose up -d``
 
 ### PHP local:
-``cd $CAMINHO_PROJETO/src``
-
-``composer install``
-
-``php artisan serve``
+```
+cd $CAMINHO_PROJETO/src
+composer install
+php artisan serve
+```
