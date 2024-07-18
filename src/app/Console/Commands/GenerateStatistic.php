@@ -13,7 +13,7 @@ class GenerateStatistic extends Command {
         parent::__construct();
     }
 
-    protected $signature = 'app:generate-statistic';
+    protected $signature = 'app:generate-statistics';
     protected $description = 'Generate statistic records';
 
     public function handle()

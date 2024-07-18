@@ -37,6 +37,10 @@ RUN cd /bin \
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
 
+RUN apt install -y cron
+COPY ./cron /var/spool/cron/crontabs/root
+RUN chmod 0600 /var/spool/cron/crontabs/root
+
 WORKDIR /var/www/html
 
 COPY ./config/nginx.conf /etc/nginx/sites-available/default
@@ -45,6 +49,8 @@ COPY ./config/entrypoint /usr/local/bin/entrypoint
 
 RUN composer install
 RUN chmod 0777 /var/www/html/storage
+
+RUN php artisan migrate
 
 RUN chmod +x /usr/local/bin/entrypoint
 
