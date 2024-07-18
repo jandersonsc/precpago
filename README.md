@@ -6,6 +6,7 @@
 
 # Requisitos
 - Docker
+
 Em caso de não possuir Docker:
 - PHP 8.2
 - Composer v2
@@ -17,5 +18,7 @@ Em caso de não possuir Docker:
 
 ### PHP local:
 ``cd $CAMINHO_PROJETO/src``
+
 ``composer install``
+
 ``php artisan serve``
