@@ -4,19 +4,23 @@
 - Laravel 11
 - Docker
 
-# Requisitos
+# Instalação
+## Com Docker
+### Requisitos
 - Docker
 
-Em caso de não possuir Docker:
+Execute no seu terminal:
+```
+cd $CAMINHO_PROJETO/src
+docker-compose up -d
+```
+
+## Sem Docker
+### Requisitos
 - PHP 8.2
 - Composer v2
 
-# Instalação
-
-### Usando Docker:
-``docker-compose up -d``
-
-### PHP local:
+Execute no seu terminal:
 ```
 cd $CAMINHO_PROJETO/src
 composer install
