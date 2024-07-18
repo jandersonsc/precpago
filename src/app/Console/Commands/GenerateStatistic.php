@@ -18,6 +18,15 @@ class GenerateStatistic extends Command {
 
     public function handle()
     {
-        $this->service->processTransactions();
+
+        $runnedTime = 0;
+        $timesToRunPerMinute = 12;
+        $sleep = 60 / $timesToRunPerMinute;
+
+        while ($runnedTime < $timesToRunPerMinute) {
+            $this->service->processTransactions();
+            $runnedTime++;
+            sleep($sleep);
+        }
     }
 }

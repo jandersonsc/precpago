@@ -50,8 +50,6 @@ COPY ./config/entrypoint /usr/local/bin/entrypoint
 RUN composer install
 RUN chmod 0777 /var/www/html/storage
 
-RUN php artisan migrate
-
 RUN chmod +x /usr/local/bin/entrypoint
 
 EXPOSE 80
