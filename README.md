@@ -17,7 +17,7 @@ docker-compose up -d
 
 #### Execução de testes
 ```shell
-docker exec precpag-api "./vendor/bin/phpunit"
+docker exec precpago-api "./vendor/bin/phpunit"
 ```
 
 ### Sem Docker
