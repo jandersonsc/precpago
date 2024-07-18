@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Transactions;
-use App\Http\Controllers\Statistics;
+use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\StatisticsController;
 
-Route::prefix('transactions')->controller(Transactions::class)->group(function () {
+Route::prefix('transactions')->controller(TransactionsController::class)->group(function () {
     Route::post('/', 'create');
-    Route::delete('/{id}', 'delete');
+    Route::delete('/', 'delete');
 });
 
-Route::get('statistics', [Statistics::class, 'getAll']);
+Route::get('statistics', [StatisticsController::class, 'getAll']);
