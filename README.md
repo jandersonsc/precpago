@@ -1,6 +1,11 @@
-# Requisitos
+# Tecnologias utilizadas
+- PHP 8.2
+- Nginx
+- Laravel 11
 - Docker
 
+# Requisitos
+- Docker
 Em caso de não possuir Docker:
 - PHP 8.2
 - Composer v2
@@ -11,12 +16,6 @@ Em caso de não possuir Docker:
 ``docker-compose up -d``
 
 ### PHP local:
-``cd CAMINHO_PROJETO/src``
+``cd $CAMINHO_PROJETO/src``
 ``composer install``
 ``php artisan serve``
-
-# Tecnologias utilizadas
-- PHP 8.2
-- Nginx
-- Laravel 11
-- Docker
