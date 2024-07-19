@@ -14,9 +14,9 @@ class TransactionService implements ITransactionService {
 
     public function createTransaction($data): array
     {
-        $timeDiff = $this->getDifferenceFromTimestampTransaction($data['timestamp']);
+        $differenceInSeconds = $this->getDifferenceFromTimestampTransaction($data['timestamp']);
 
-        if ($timeDiff > 60) {
+        if ($differenceInSeconds > 60) {
             $this->storeSecondaryTransaction($data['amount']);
             return 204;
         }
