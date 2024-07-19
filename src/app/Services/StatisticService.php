@@ -19,6 +19,11 @@ class StatisticService implements IStatisticService {
 
     public function processTransactions(): void
     {
+        $this->processData();
+    }
+
+    protected function processData(): array
+    {
         $data = $this->getData();
         $values = Arr::pluck($data, 'amount');
         $collection = collect($values);

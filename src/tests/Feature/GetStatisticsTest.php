@@ -11,6 +11,7 @@ class GetStatisticsTest extends TestCase {
         $response = $this->get('/api/statistics');
         $response->assertStatus(200);
 
+        // TODO: Validar se tiver zerado
         $response->assertJson([
             'avg' => true,
             'sum' => true,

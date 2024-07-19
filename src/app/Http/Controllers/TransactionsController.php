@@ -18,16 +18,21 @@ class TransactionsController extends Controller {
     public function create(CreateTransaction $request)
     {
         try {
-            $this->transactionService->createTransaction($request->all());
+
+            /**
+             * TODO: Levar validação para o Request
+             */
+            $timeDiff = TimeHelper::dateTimeDiffWithCurrentDate($request->timestamp);
+            if ($timeDiff < 0) {
+                return response('', 422);
+            }
 
             $httpStatus = 201;
-            $timeDiff = TimeHelper::dateTimeDiffWithCurrentDate($request->timestamp);
-
             if ($timeDiff > 60) {
                 $httpStatus = 204;
-            } else if ($timeDiff < 0) {
-                $httpStatus = 422;
             }
+
+            $this->transactionService->createTransaction($request->all());
 
             return response('', $httpStatus);
         } catch (Exception $ex) {
