@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Helpers\TimeHelper;
+use Closure;
 
 class CreateTransaction extends FormRequest {
 
@@ -15,7 +17,16 @@ class CreateTransaction extends FormRequest {
     {
         return [
             'amount' => 'required|decimal:0,2',
-            'timestamp' => 'required|date_format:Y-m-d\TH:i:s.v\Z',
+            'timestamp' => [
+                'required',
+                'date_format:Y-m-d\TH:i:s.v\Z',
+                function (string $attribute, mixed $value, Closure $fail) {
+                    $timeDiff = TimeHelper::dateTimeDiffWithCurrentDate($value);
+                    if ($timeDiff < 0) {
+                        $fail("The {$attribute} is invalid.");
+                    }
+                },
+            ]
         ];
     }
 

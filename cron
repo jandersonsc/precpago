@@ -1,2 +1,2 @@
 * * * * * cd /var/www/html && php artisan app:generate-statistics >> /dev/null 2>&1
-* * * * * cd /var/www/html && php artisan app:generate-transactions >> /dev/null 2>&1
+#* * * * * cd /var/www/html && php artisan app:generate-transactions >> /dev/null 2>&1

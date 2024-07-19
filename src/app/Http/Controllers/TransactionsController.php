@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTransaction;
 use App\Services\TransactionService;
-use App\Helpers\TimeHelper;
 
 class TransactionsController extends Controller {
 
@@ -18,23 +17,11 @@ class TransactionsController extends Controller {
     public function create(CreateTransaction $request)
     {
         try {
+            $result = $this->transactionService->createTransaction(
+                    $request->all()
+            );
 
-            /**
-             * TODO: Levar validação para o Request
-             */
-            $timeDiff = TimeHelper::dateTimeDiffWithCurrentDate($request->timestamp);
-            if ($timeDiff < 0) {
-                return response('', 422);
-            }
-
-            $httpStatus = 201;
-            if ($timeDiff > 60) {
-                $httpStatus = 204;
-            }
-
-            $this->transactionService->createTransaction($request->all());
-
-            return response('', $httpStatus);
+            return response('', $result['code']);
         } catch (Exception $ex) {
             return response('', 400);
         }
