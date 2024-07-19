@@ -9,9 +9,6 @@ use App\Helpers\Consts;
 
 class TransactionService implements ITransactionService {
 
-    protected $filePath = Consts::CURRENT_FOLDER_NAME;
-    protected $secondaryFilePath = Consts::SECONDARY_FILE_NAME;
-
     public function createTransaction($data): array
     {
         $differenceInSeconds = $this->getDifferenceFromTimestampTransaction($data['timestamp']);
@@ -27,19 +24,19 @@ class TransactionService implements ITransactionService {
 
     public function deleteAll(): void
     {
-        Storage::delete($this->filePath);
-        Storage::delete($this->secondaryFilePath);
+        Storage::deleteDirectory(Consts::CURRENT_FOLDER_NAME);
+        Storage::delete(Consts::SECONDARY_FILE_NAME);
     }
 
     protected function storePrimaryTransaction($value, $timestamp)
     {
-        $path = $this->filePath . strtotime($timestamp);
+        $path = Consts::CURRENT_FOLDER_NAME . strtotime($timestamp);
         Storage::append($path, $value);
     }
 
     protected function storeSecondaryTransaction($value)
     {
-        $path = $this->secondaryFilePath;
+        $path = Consts::SECONDARY_FILE_NAME;
         Storage::append($path, $value);
     }
 
