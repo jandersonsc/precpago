@@ -5,10 +5,11 @@ namespace App\Services;
 use App\Services\Interfaces\IStatisticService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
+use App\Helpers\Consts;
 
 class StatisticService implements IStatisticService {
 
-    protected $filePath = 'statistics.json';
+    protected $filePath = Consts::STATISTICS_FILE_NAME;
 
     public function getAll(): array
     {
@@ -41,7 +42,7 @@ class StatisticService implements IStatisticService {
 
     protected function getData(): array
     {
-        $content = Storage::get('transactions.txt');
+        $content = Storage::get(Consts::CURRENT_FILE_NAME);
         $lines = explode("\n", $content);
 
         $data = [];

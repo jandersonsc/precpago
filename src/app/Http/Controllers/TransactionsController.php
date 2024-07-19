@@ -21,7 +21,7 @@ class TransactionsController extends Controller {
                     $request->all()
             );
 
-            return response('', $result['code']);
+            return response('', $result);
         } catch (Exception $ex) {
             return response('', 400);
         }

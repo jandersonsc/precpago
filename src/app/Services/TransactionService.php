@@ -5,33 +5,46 @@ namespace App\Services;
 use App\Services\Interfaces\ITransactionService;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\TimeHelper;
+use App\Helpers\Consts;
 
 class TransactionService implements ITransactionService {
 
-    protected $filePath = 'current-transactions';
-    protected $secondaryFilePath = 'secondary-transactions';
+    protected $filePath = Consts::CURRENT_FOLDER_NAME;
+    protected $secondaryFilePath = Consts::SECONDARY_FILE_NAME;
 
     public function createTransaction($data): array
     {
+        $timeDiff = $this->getDifferenceFromTimestampTransaction($data['timestamp']);
 
-        $timeDiff = TimeHelper::dateTimeDiffWithCurrentDate($data['timestamp']);
-
-        $secondary = false;
         if ($timeDiff > 60) {
-            $secondary = true;
+            $this->storeSecondaryTransaction($data['amount']);
+            return 204;
         }
 
-        $fileName = ($secondary) ? $this->secondaryFilePath : $this->filePath;
-        Storage::append($fileName, json_encode($data));
-
-        return [
-            'code' => ($secondary) ? 204 : 201
-        ];
+        $this->storePrimaryTransaction($data['amount'], $data['timestamp']);
+        return 201;
     }
 
     public function deleteAll(): void
     {
         Storage::delete($this->filePath);
         Storage::delete($this->secondaryFilePath);
+    }
+
+    protected function storePrimaryTransaction($value, $timestamp)
+    {
+        $path = $this->filePath . strtotime($timestamp);
+        Storage::append($path, $value);
+    }
+
+    protected function storeSecondaryTransaction($value)
+    {
+        $path = $this->secondaryFilePath;
+        Storage::append($path, $value);
+    }
+
+    protected function getDifferenceFromTimestampTransaction($timestamp)
+    {
+        return TimeHelper::dateTimeDiffWithCurrentDate($timestamp);
     }
 }
