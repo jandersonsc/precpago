@@ -20,7 +20,7 @@ class GenerateStatistic extends Command {
     {
 
         $runnedTime = 0;
-        $timesToRunPerMinute = 20;
+        $timesToRunPerMinute = 59;
         $sleep = 60 / $timesToRunPerMinute;
 
         while ($runnedTime < $timesToRunPerMinute) {

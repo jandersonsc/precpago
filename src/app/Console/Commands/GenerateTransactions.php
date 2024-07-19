@@ -20,7 +20,7 @@ class GenerateTransactions extends Command {
     {
 
         $runnedTime = 0;
-        $timesToRunPerMinute = 10;
+        $timesToRunPerMinute = 60;
         $sleep = 60 / $timesToRunPerMinute;
 
         while ($runnedTime < $timesToRunPerMinute) {
@@ -30,7 +30,7 @@ class GenerateTransactions extends Command {
                 'timestamp' => date('Y-m-d\TH:i:s.v\Z')
             ];
 
-            //$this->service->createTransaction($payload);
+            $this->service->createTransaction($payload);
             $runnedTime++;
             sleep($sleep);
         }

@@ -3,13 +3,12 @@
 namespace App\Services;
 
 use App\Services\Interfaces\ITransactionService;
-use Illuminate\Support\Facades\Storage;
 use App\Helpers\TimeHelper;
-use App\Helpers\Consts;
+use App\Helpers\FileManagerHelper;
 
 class TransactionService implements ITransactionService {
 
-    public function createTransaction($data): array
+    public function createTransaction($data): int
     {
         $differenceInSeconds = $this->getDifferenceFromTimestampTransaction($data['timestamp']);
 
@@ -24,20 +23,18 @@ class TransactionService implements ITransactionService {
 
     public function deleteAll(): void
     {
-        Storage::deleteDirectory(Consts::CURRENT_FOLDER_NAME);
-        Storage::delete(Consts::SECONDARY_FILE_NAME);
+        FileManagerHelper::clearAllData();
     }
 
     protected function storePrimaryTransaction($value, $timestamp)
     {
-        $path = Consts::CURRENT_FOLDER_NAME . strtotime($timestamp);
-        Storage::append($path, $value);
+        $fileName = strtotime($timestamp);
+        FileManagerHelper::storeDataPrimaryTransaction($value, $fileName);
     }
 
     protected function storeSecondaryTransaction($value)
     {
-        $path = Consts::SECONDARY_FILE_NAME;
-        Storage::append($path, $value);
+        FileManagerHelper::storeDataSecondaryTransaction($value);
     }
 
     protected function getDifferenceFromTimestampTransaction($timestamp)

@@ -11,4 +11,11 @@ class TimeHelper {
 
         return $currentTimestamp - $date->format('U');
     }
+
+    public static function timestampDiffWithCurrentDate(int $timestamp)
+    {
+        $currentTimestamp = date('U', time());
+
+        return $currentTimestamp - $timestamp;
+    }
 }
